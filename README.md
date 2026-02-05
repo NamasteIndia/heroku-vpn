@@ -3,7 +3,7 @@
 
 ### Disclaimer:
 <code>NEITHER me NOR this project shall be in any way held responsible if YOUR ACCOUNT gets banned. It is YOUR sole
-reponsibility to use this project in whatever way you may want. However I totally recommend AGAINST ABUSING these 
+responsibility to use this project in whatever way you may want. However I totally recommend AGAINST ABUSING these 
 services with excessive usage.</code><br>
 ### Prerequisites:
 - Free [Heroku](https://www.heroku.com/home) account or Free [Koyeb](https://www.koyeb.com/) account
