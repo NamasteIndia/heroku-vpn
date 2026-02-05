@@ -1,12 +1,12 @@
-<h1 align="center">Heroku VPN</h1>
-<h2 align="center">Easily spin up an ephemeral VPN on heroku using tailscale under the hood</h2><br>
+<h1 align="center">Heroku/Koyeb VPN</h1>
+<h2 align="center">Easily spin up an ephemeral VPN on Heroku or Koyeb using tailscale under the hood</h2><br>
 
 ### Disclaimer:
 <code>NEITHER me NOR this project shall be in any way held responsible if YOUR ACCOUNT gets banned. It is YOUR sole
 reponsibility to use this project in whatever way you may want. However I totally recommend AGAINST ABUSING these 
 services with excessive usage.</code><br>
 ### Prerequisites:
-- Free [Heroku](https://www.heroku.com/home) account
+- Free [Heroku](https://www.heroku.com/home) account or Free [Koyeb](https://www.koyeb.com/) account
 - Free [Tailscale](https://tailscale.com/) account<br>
 ### Pre Deployment Guide:
 1. Signup on [Tailscale](https://tailscale.com/).
@@ -40,7 +40,22 @@ Also save it for future use.
     ![5](/assets/5.png)
     ![6](/assets/6.png)<br>
 ### Deployment:
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)<br>
+#### Heroku:
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+#### Koyeb:
+1. Fork this repository to your GitHub account
+2. Sign up for a free account at [Koyeb](https://www.koyeb.com/)
+3. Click **Create App** in the Koyeb control panel
+4. Select **GitHub** as the deployment method and connect your repository
+5. Configure the following:
+   - **Builder**: Dockerfile
+   - **Port**: 8000 (or any port you prefer)
+   - **Environment Variables**: Add `TAILSCALE_AUTHKEY` with your Tailscale auth key
+   - **Health Check Path**: `/health`
+6. Click **Deploy**
+
+**Note**: Koyeb will use the Dockerfile for deployment and the `/health` endpoint for health checks.<br>
 ### Post Deployment guide:
 1. Open tailscale client on the device you want to use VPN. (Guide shows for android)
 
@@ -55,10 +70,11 @@ Also save it for future use.
     ![D](/assets/D.jpeg)<br>
 ### Notes:
 - Make sure, you have followed the steps as precisely as possible.
-- As always, heroku dynos will sleep after a certain amount of time. This repo has no hardcoded way to circumvent that (who needs a VPN 24/7 anyways ?) but it does serve a site which you can ping. So, it is totally upto YOU how you want to keep it running. Few utilities worth noting are: 
+- **Heroku**: As always, heroku dynos will sleep after a certain amount of time. This repo has no hardcoded way to circumvent that (who needs a VPN 24/7 anyways ?) but it does serve a site which you can ping. So, it is totally upto YOU how you want to keep it running. Few utilities worth noting are: 
   - https://kaffeine.herokuapp.com/
   - https://cron-job.org/en/
-- Each time your heroku app restarts, a new machine will pop up in tailscale dashboard and the old offline ones will disappear eventually. YOU have to make sure to choose the correct exit node each time, failing which will block your internet.
+- **Koyeb**: Free tier apps on Koyeb also have limitations. Check Koyeb's documentation for current limits. The health check endpoint at `/health` helps Koyeb monitor the application status.
+- Each time your Heroku/Koyeb app restarts, a new machine will pop up in tailscale dashboard and the old offline ones will disappear eventually. YOU have to make sure to choose the correct exit node each time, failing which will block your internet.
 - **[Tailscale](https://tailscale.com/)** is a great tool in itself with extensive documention, make sure to try it.<br>
 ### Todo:
 - V2 with native wireguard implementation. (iff possible)
